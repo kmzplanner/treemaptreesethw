@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -13,7 +14,17 @@ public class Main {
         personList.add(new Person("Vasya2","Vasilev2", 55));
 
         System.out.println(personList);
-        Collections.sort(personList, new PersonSurnameLengthComparator());
+        Comparator<Person> comparator = (o1, o2) -> {
+            if(o1.getSurname().split(" ").length > o2.getSurname().split(" ").length) {
+                return  -1;
+            } else if (o1.getSurname().split(" ").length < o2.getSurname().split(" ").length){
+                return 1;
+            } else {
+                return Integer.compare(o2.getAge(),o1.getAge());
+            }
+
+        };
+        Collections.sort(personList, comparator);
         System.out.println(personList);
     }
 }
